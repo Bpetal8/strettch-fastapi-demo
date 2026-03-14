@@ -107,6 +107,43 @@ Detailed commands and configurations are documented in the repository.
 
 ---
 
+## API Endpoints
+
+GET /
+
+Returns the application status.
+
+Example response:
+
+{"status":"ok","message":"FastAPI is running"}
+
+GET /health
+
+Health check endpoint used to verify service availability.
+
+Example response:
+
+{"status":"healthy"}
+
+POST /predict
+
+Simulated ML inference endpoint.
+
+Example request:
+
+curl -X POST http://localhost/predict \
+-H "Content-Type: application/json" \
+-d '{"input": 12.5}'
+
+Example response:
+
+{
+ "input": 12.5,
+ "prediction": 18.75,
+ "model": "demo-linear-model"
+}
+---
+
 ## Production Validation
 
 The deployment was validated using standard Linux service management tools.
@@ -154,7 +191,7 @@ sudo apt install python3 python3-venv python3-pip nginx -y
 ### 3. Clone repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Bpetal8/strettch-fastapi-demo.git
 cd strettch-fastapi-demo
 ```
 
@@ -223,9 +260,15 @@ This feedback loop is critical for improving platform adoption.
 
 ---
 
-## Next Improvements
+## Future Enhancements
 
-- Authentication
-- Logging and monitoring
-- Background task processing
-- Horizontal scaling
+This project intentionally focuses on a minimal production deployment.
+
+Possible future enhancements include:
+
+- Authentication and API access control
+- Structured logging and monitoring integration
+- Background task processing using a queue system
+- Horizontal scaling behind a load balancer
+
+These additions would further align the architecture with production workloads running on cloud infrastructure.
