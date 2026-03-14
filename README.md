@@ -83,7 +83,7 @@ strettch-fastapi-demo/
 To explore the project locally:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Bpetal8/strettch-fastapi-demo.git
 cd strettch-fastapi-demo
 python3 -m venv venv
 source venv/bin/activate
