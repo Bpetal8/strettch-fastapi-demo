@@ -1,0 +1,5 @@
+strettchvenv/
+__pycache__/
+.env
+*.pyc
+*.log
