@@ -3,14 +3,17 @@ Description=Strettch FastAPI Service
 After=network.target
 
 [Service]
-User=www-data
+User=ubuntu
 Group=www-data
-
-WorkingDirectory=/var/www/strettch-fastapi-demo
-
+WorkingDirectory=/home/ubuntu/strettch-fastapi-demo
+Environment="PATH=/home/ubuntu/strettch-fastapi-demo/venv/bin"
 Environment="APP_ENV=production"
 
-ExecStart=/var/www/strettch-fastapi-demo/venv/bin/gunicorn app.main:app --workers 2 --worker-class uvicorn.workers.UvicornWorker --bind 127.0.0.1:8000
+ExecStart=/home/ubuntu/strettch-fastapi-demo/venv/bin/gunicorn \
+    --workers 2 \
+    --worker-class uvicorn.workers.UvicornWorker \
+    --bind 127.0.0.1:8000 \
+    app.main:app
 
 Restart=always
 RestartSec=3

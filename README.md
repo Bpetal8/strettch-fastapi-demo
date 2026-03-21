@@ -1,12 +1,16 @@
 # Deploying a Production-Ready FastAPI Service on Strettch Cloud
 
-This project was developed as part of a Developer Advocate technical exercise demonstrating how a FastAPI service could be deployed on Strettch Cloud infrastructure.
+This project shows how to deploy a FastAPI application using a production-style Linux setup that mirrors how applications run on Strettch Cloud infrastructure.
 
-This repository demonstrates how to deploy a production-ready Python FastAPI application using a production-style Linux architecture.
+Instead of relying on heavy abstractions, this approach uses standard, battle-tested components:
 
-The setup mirrors how a FastAPI service would run on a cloud virtual machine, including platforms like Strettch Cloud.
+- **Nginx** for reverse proxy and request handling  
+- **Gunicorn** as the application server  
+- **systemd** for process management  
 
-It uses standard infrastructure components including Nginx, Gunicorn, and systemd to create a reliable and maintainable deployment.
+The result is a clean, reliable deployment that is easy to understand, debug, and run on a cloud VM such as Strettch Cloud.
+
+This makes it a practical starting point for developers looking to move from local development to real-world cloud deployment.
 
 ---
 
@@ -19,6 +23,20 @@ Many African teams build solid Python applications but struggle with:
 - Data locality and compliance  
 
 This project shows a clean, minimal path to running a FastAPI service using standard Linux tooling and honest architectural trade-offs.
+
+---
+
+## Why Strettch Cloud?
+
+For developers building in Africa, infrastructure decisions matter.
+
+Strettch Cloud provides:
+
+- Local, Africa-based infrastructure
+- Predictable pricing
+- A simple VM-based model that aligns with standard Linux deployments
+
+This makes it a strong fit for teams that want control, transparency, and reliable performance without unnecessary complexity.
 
 ---
 
@@ -41,11 +59,13 @@ systemd (Process Manager)
 v
 Linux VM (Cloud Instance)
 ```
-In this project the Linux VM environment was simulated using Ubuntu on WSL, which provides the same systemd, networking, and service management tools used on cloud instances.
+In this project, the Linux VM environment is replicated using Ubuntu on WSL, providing the same systemd, networking, and service management tools used in real cloud environments like Strettch Cloud.
+
+This setup was run entirely in a local WSL environment, but follows the exact same steps and tooling used when deploying to a real cloud VM such as Strettch Cloud.
 
 **Key Components**
 
-- Linux VM (simulating a cloud instance)
+- Linux VM (cloud-equivalent environment)
 - Nginx for request routing and reverse proxy
 - Gunicorn as the production application server
 - FastAPI for application logic
@@ -94,7 +114,7 @@ This installs the dependencies required to run the FastAPI application locally.
 
 ## Deployment Overview
 
-High-level steps used to deploy this application:
+Here’s a simple overview of how this application would be deployed on a cloud VM (e.g., Strettch Cloud):
 
 1. Provision a Linux VM on Strettch Cloud
 2. SSH into the server
@@ -103,13 +123,15 @@ High-level steps used to deploy this application:
 5. Run FastAPI as a systemd service
 6. Expose the service using Nginx
 
+These steps directly translate to deploying on a Strettch Cloud instance.
+
 Detailed commands and configurations are documented in the repository.
 
 ---
 
 ## API Endpoints
 
-GET /
+### GET /
 
 Returns the application status.
 
@@ -117,7 +139,7 @@ Example response:
 
 {"status":"ok","message":"FastAPI is running"}
 
-GET /health
+### GET /health
 
 Health check endpoint used to verify service availability.
 
@@ -125,7 +147,7 @@ Example response:
 
 {"status":"healthy"}
 
-POST /predict
+### POST /predict
 
 Simulated ML inference endpoint.
 
@@ -174,7 +196,7 @@ Expected response:
 
 ## Linux Deployment (Example on Ubuntu VM)
 
-Below is an example deployment process on a Linux VM provisioned on Strettch Cloud.
+Below is an example deployment process for a Linux VM, following the same steps used on platforms like Strettch Cloud.
 
 ### 1. Update server
 
@@ -182,7 +204,7 @@ Below is an example deployment process on a Linux VM provisioned on Strettch Clo
 sudo apt update && sudo apt upgrade -y
 ```
 
-### 2. Install Python & system dependencies
+### 2. Install Python and required system dependencies
 
 ```bash
 sudo apt install python3 python3-venv python3-pip nginx -y
@@ -251,13 +273,13 @@ Only Nginx is exposed publicly, reducing the attack surface.
 
 ## Observations & Learnings
 
-This section documents:
-- What worked well during the deployment process
-- Areas that could be smoother for first-time users
-- Practical suggestions to improve the developer experience
+While setting up this deployment, here are some practical takeaways:
 
-This feedback loop is critical for improving platform adoption.
+- The stack (Nginx + Gunicorn + systemd) is simple and reliable
+- Debugging is straightforward compared to container-heavy setups
+- The setup process is transparent and easy to reason about
 
+These insights are important when thinking about developer experience and how platforms like Strettch Cloud can lower the barrier to production deployment.
 ---
 
 ## Future Enhancements
@@ -272,3 +294,8 @@ Possible future enhancements include:
 - Horizontal scaling behind a load balancer
 
 These additions would further align the architecture with production workloads running on cloud infrastructure.
+
+## Demo
+
+Watch the full deployment walkthrough here:  
+[Add your video link]
